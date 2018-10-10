@@ -1,11 +1,14 @@
 import { dynamoDb } from "../index.js";
+import { getTodosByTodoList } from "./todos.resolvers.js";
 import * as uuid from "uuid";
+
+const TableName = "alex-todolist";
 
 const newTodoList = (_, { input }) => {
   const { title } = input;
 
   const params = {
-    TableName: "alex-todolist",
+    TableName,
     Item: {
       id: uuid.v1(),
       title,
@@ -23,7 +26,7 @@ const newTodoList = (_, { input }) => {
 
 const getTodoList = (_, { id }) => {
   const params = {
-    TableName: "alex-todolist",
+    TableName,
     Key: { id }
   };
 
@@ -42,7 +45,7 @@ const updateTodoList = (_, { input }) => {
   const { id, title, todos } = input;
 
   const params = {
-    TableName: "alex-todolist",
+    TableName,
     Key: { id },
     ExpressionAttributeNames: {
       "#i": "id"
@@ -70,7 +73,7 @@ const updateTodoList = (_, { input }) => {
 
 const allTodoLists = () => {
   return dynamoDb
-    .scan({ TableName: "alex-todolist" })
+    .scan({ TableName })
     .promise()
     .then(response => {
       return response.Items;
@@ -82,7 +85,7 @@ const allTodoLists = () => {
 
 const removeTodoList = (_, { id }) => {
   const params = {
-    TableName: "alex-todolist",
+    TableName,
     Key: { id },
     ReturnValues: "ALL_OLD"
   };
@@ -99,6 +102,14 @@ const removeTodoList = (_, { id }) => {
 };
 
 export const todoListResolvers = {
-  Query: { allTodoLists, TodoList: getTodoList },
-  Mutation: { newTodoList, updateTodoList, removeTodoList }
+  Query: {
+    allTodoLists,
+    TodoList: getTodoList
+  },
+  Mutation: { newTodoList, updateTodoList, removeTodoList },
+  TodoList: {
+    todos: todoList => {
+      return getTodosByTodoList(todoList.id);
+    }
+  }
 };

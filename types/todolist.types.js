@@ -14,12 +14,15 @@ export const todoListTypeDefs = gql`
   }
 
   input NewTodoList {
+    id: ID!
     title: String!
+    todos: [ID]!
   }
 
   type Query {
     allTodoLists: [TodoList]!
     TodoList(id: ID!): TodoList!
+    # getTodoListById(id: ID!) TodoList!
   }
 
   type Mutation {
