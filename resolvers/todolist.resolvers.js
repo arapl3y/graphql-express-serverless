@@ -61,7 +61,6 @@ const updateTodoList = (_, { input }) => {
     .update(params)
     .promise()
     .then(result => {
-      console.log(result);
       return result.Attributes;
     })
     .catch(err => {
