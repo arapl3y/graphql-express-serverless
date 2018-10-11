@@ -14,9 +14,9 @@ export const todoListTypeDefs = gql`
   }
 
   input NewTodoList {
-    id: ID!
+    id: ID
     title: String!
-    todos: [ID]!
+    todos: [ID]
   }
 
   type Query {

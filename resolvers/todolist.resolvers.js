@@ -15,6 +15,7 @@ const newTodoList = (_, { input }) => {
       todos: []
     }
   };
+
   return dynamoDb
     .put(params)
     .promise()
