@@ -48,14 +48,15 @@ const updateTodo = (_, { input }) => {
     TableName,
     Key: { id },
     ExpressionAttributeNames: {
-      "#i": "id"
+      "#i": "id",
+      "#todo_text": "text"
     },
     ExpressionAttributeValues: {
       ":id": id,
       ":text": text,
       ":completed": completed
     },
-    UpdateExpression: "SET text = :text, completed = :completed",
+    UpdateExpression: "SET #todo_text = :text, completed = :completed",
     ConditionExpression: "#i = :id",
     ReturnValues: "ALL_NEW"
   };
