@@ -1,2 +1,2 @@
-export { todoListTypeDefs } from "./todolist.types.js";
-export { todosTypeDefs } from "./todos.types.js";
+export { listTypeDefs } from "./list.types.js";
+export { itemTypeDefs } from "./item.types.js";

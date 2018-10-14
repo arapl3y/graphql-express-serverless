@@ -38,10 +38,10 @@ functions:
 
 resources:
   Resources:
-    todoListTable:
+    listTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: alex-todolist
+        TableName: alex-list
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
@@ -51,10 +51,10 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-    todosTable:
+    itemsTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: alex-todos
+        TableName: alex-items
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S

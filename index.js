@@ -3,8 +3,8 @@ import serverless from "serverless-http";
 import graphiql from "graphql-playground-middleware-express";
 import merge from "lodash.merge";
 import { ApolloServer } from "apollo-server-express";
-import { todoListResolvers, todosResolvers } from "./resolvers";
-import { todoListTypeDefs, todosTypeDefs } from "./types";
+import { listResolvers, itemResolvers } from "./resolvers";
+import { listTypeDefs, itemTypeDefs } from "./types";
 import * as AWS from "aws-sdk";
 
 export const dynamoDb = new AWS.DynamoDB.DocumentClient({
@@ -12,8 +12,8 @@ export const dynamoDb = new AWS.DynamoDB.DocumentClient({
   endpoint: "http://localhost:8000"
 });
 
-const typeDefs = [todoListTypeDefs, todosTypeDefs];
-const resolvers = merge({}, todoListResolvers, todosResolvers);
+const typeDefs = [listTypeDefs, itemTypeDefs];
+const resolvers = merge({}, listResolvers, itemResolvers);
 
 const app = express();
 

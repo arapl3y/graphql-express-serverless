@@ -1,21 +1,21 @@
 import { gql } from "apollo-server-express";
 
-export const todosTypeDefs = gql`
-  type Todo {
+export const itemTypeDefs = gql`
+  type Item {
     id: ID!
     text: String!
     completed: Boolean!
     listId: ID!
   }
 
-  input UpdatedTodo {
+  input UpdatedItem {
     id: ID!
     text: String
     completed: Boolean
     listId: ID
   }
 
-  input NewTodo {
+  input NewItem {
     id: ID
     text: String!
     completed: Boolean
@@ -23,14 +23,14 @@ export const todosTypeDefs = gql`
   }
 
   extend type Query {
-    allTodos: [Todo]!
-    Todo(id: ID!): Todo!
-    getTodosByTodoList(listId: ID!): [Todo]!
+    allItems: [Item]!
+    Item(id: ID!): Item!
+    getItemsByList(listId: ID!): [Item]!
   }
 
   extend type Mutation {
-    newTodo(input: NewTodo!): Todo!
-    removeTodo(id: ID!): Todo!
-    updateTodo(input: UpdatedTodo!): Todo!
+    newItem(input: NewItem!): Item!
+    removeItem(id: ID!): Item!
+    updateItem(input: UpdatedItem!): Item!
   }
 `;
