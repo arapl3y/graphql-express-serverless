@@ -82,7 +82,7 @@ export const listResolvers = {
   Mutation: { newList, updateList, removeList },
   List: {
     items: list => {
-      return getItemsByList(list.id);
+      return getItemsByList(null, { listId: list.id });
     }
   }
 };

@@ -27,7 +27,7 @@ const getItem = async (_, { id }) => {
     Key: { id }
   };
 
-  const result = await dynamoDb.get(params).promise();
+  await dynamoDb.get(params).promise();
 
   return result.Item;
 };
@@ -63,7 +63,7 @@ const allItems = async () => {
   return result.Items;
 };
 
-export const getItemsByList = async listId => {
+export const getItemsByList = async (_, { listId }) => {
   const params = {
     TableName,
     FilterExpression: "listId = :id",
