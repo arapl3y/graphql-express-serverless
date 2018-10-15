@@ -7,9 +7,15 @@ import { listResolvers, itemResolvers } from "./resolvers";
 import { listTypeDefs, itemTypeDefs } from "./types";
 import * as AWS from "aws-sdk";
 
+// Local
+// export const dynamoDb = new AWS.DynamoDB.DocumentClient({
+//   region: "localhost",
+//   endpoint: "http://localhost:8000"
+// });
+
 export const dynamoDb = new AWS.DynamoDB.DocumentClient({
-  region: "localhost",
-  endpoint: "http://localhost:8000"
+  region: "ap-southeast-2",
+  endpoint: "https://dynamodb.ap-southeast-2.amazonaws.com"
 });
 
 const typeDefs = [listTypeDefs, itemTypeDefs];
@@ -20,6 +26,8 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  introspection: true,
+  playground: true,
   path: "/graphql"
 });
 
