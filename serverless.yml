@@ -9,16 +9,27 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  stage: "${opt:stage, self:provider.stage}"
   dynamodb:
     start:
       port: 8000
       inMemory: true
       migrate: true
+      seed: true
+    seed:
+      lists:
+        sources:
+          - table: alex-list
+            sources: [./lists.json]
+      items:
+        sources:
+          - table: alex-items
+            sources: [./items.json]
 
 provider:
   name: aws
+  environment: ${file(env.yml):${self:custom.stage}}
   runtime: nodejs8.10
-  stage: dev
   region: ap-southeast-2
   profile: personal
   iamRoleStatements:
