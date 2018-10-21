@@ -16,7 +16,7 @@ const newItem = async (_, { input }) => {
     }
   };
 
-  const result = await dynamoDb.put(params).promise();
+  await dynamoDb.put(params).promise();
 
   return params.Item;
 };
@@ -56,6 +56,8 @@ const updateItem = async (_, { input }) => {
 
   return result.Attributes;
 };
+
+// Add single function for updating completed state
 
 const allItems = async () => {
   const result = await dynamoDb.scan({ TableName }).promise();

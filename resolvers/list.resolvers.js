@@ -16,7 +16,7 @@ const newList = async (_, { input }) => {
     }
   };
 
-  const result = await dynamoDb.put(params).promise();
+  await dynamoDb.put(params).promise();
 
   return params.Item;
 };
