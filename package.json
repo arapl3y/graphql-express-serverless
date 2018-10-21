@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "staging": "sls offline start --stage staging",
+    "dev": "sls offline start --stage development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

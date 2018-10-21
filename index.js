@@ -7,16 +7,16 @@ import { listResolvers, itemResolvers } from "./resolvers";
 import { listTypeDefs, itemTypeDefs } from "./types";
 import * as AWS from "aws-sdk";
 
-// Local
-// export const dynamoDb = new AWS.DynamoDB.DocumentClient({
-//   region: "localhost",
-//   endpoint: "http://localhost:8000"
-// });
-
-export const dynamoDb = new AWS.DynamoDB.DocumentClient({
-  region: "ap-southeast-2",
-  endpoint: "https://dynamodb.ap-southeast-2.amazonaws.com"
-});
+export const dynamoDb =
+  process.env.STAGE === "development"
+    ? new AWS.DynamoDB.DocumentClient({
+        region: "localhost",
+        endpoint: "http://localhost:8000"
+      })
+    : new AWS.DynamoDB.DocumentClient({
+        region: "ap-southeast-2",
+        endpoint: "https://dynamodb.ap-southeast-2.amazonaws.com"
+      });
 
 const typeDefs = [listTypeDefs, itemTypeDefs];
 const resolvers = merge({}, listResolvers, itemResolvers);

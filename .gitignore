@@ -1,5 +1,7 @@
 node_modules/
 .serverless
-.env
 .webpack/
 .dynamodb/
+.env.yml
+.env.local
+.env
