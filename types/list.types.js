@@ -22,7 +22,6 @@ export const listTypeDefs = gql`
   type Query {
     allLists: [List]!
     List(id: ID!): List!
-    # getListById(id: ID!) List!
   }
 
   type Mutation {
