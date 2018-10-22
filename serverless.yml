@@ -25,6 +25,8 @@ custom:
         sources:
           - table: alex-items
             sources: [./items.json]
+  serverless-offline:
+    host: 0.0.0.0
 
 provider:
   name: aws
