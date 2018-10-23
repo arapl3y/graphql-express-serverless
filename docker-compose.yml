@@ -2,8 +2,10 @@ version: "3"
 services:
   app:
     build: .
-    entrypoint: sls offline
+    entrypoint: npm run dev
     volumes:
       - .:/app
+      - ~/.aws/credentials:/root/.aws/credentials
     ports:
       - 3000:3000
+      - 8000:8000
