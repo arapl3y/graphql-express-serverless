@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "setup": "sls dynamodb install --stage development",
     "staging": "sls offline start --stage staging",
     "dev": "sls offline start --stage development",
     "test": "echo \"Error: no test specified\" && exit 1"

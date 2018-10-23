@@ -11,7 +11,7 @@ export const dynamoDb =
   process.env.STAGE === "development"
     ? new AWS.DynamoDB.DocumentClient({
         region: "localhost",
-        endpoint: "http://localhost:8000"
+        endpoint: "http://0.0.0.0:8000"
       })
     : new AWS.DynamoDB.DocumentClient({
         region: "ap-southeast-2",
