@@ -33,7 +33,7 @@ const getList = async (_, { id }) => {
 };
 
 const updateList = async (_, { input }) => {
-  const { id, title, items } = input;
+  const { id, title } = input;
 
   const params = {
     TableName,
@@ -43,10 +43,9 @@ const updateList = async (_, { input }) => {
     },
     ExpressionAttributeValues: {
       ":id": id,
-      ":title": title,
-      ":items": items
+      ":title": title
     },
-    UpdateExpression: "SET title = :title, items = :items",
+    UpdateExpression: "SET title = :title",
     ConditionExpression: "#i = :id",
     ReturnValues: "ALL_NEW"
   };
@@ -56,8 +55,18 @@ const updateList = async (_, { input }) => {
   return result.Attributes;
 };
 
-const allLists = async () => {
-  const result = await dynamoDb.scan({ TableName }).promise();
+const allLists = async (_, { filter }) => {
+  const params = filter
+    ? {
+        TableName,
+        FilterExpression: "contains(title, :title)",
+        ExpressionAttributeValues: { ":title": filter.title }
+      }
+    : {
+        TableName
+      };
+
+  const result = await dynamoDb.scan(params).promise();
 
   return result.Items;
 };
