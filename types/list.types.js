@@ -19,8 +19,14 @@ export const listTypeDefs = gql`
     items: [ID]
   }
 
+  input ListFilter {
+    id: ID
+    title: String
+    items: [ID]
+  }
+
   type Query {
-    allLists: [List]!
+    allLists(filter: ListFilter): [List]!
     List(id: ID!): List!
   }
 

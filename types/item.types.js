@@ -22,8 +22,15 @@ export const itemTypeDefs = gql`
     listId: ID!
   }
 
+  input ItemFilter {
+    id: ID
+    text: String
+    completed: Boolean
+    listId: ID
+  }
+
   extend type Query {
-    allItems: [Item]!
+    allItems(completed: Boolean, text: String): [Item]!
     Item(id: ID!): Item!
     getItemsByList(listId: ID!): [Item]!
   }
