@@ -59,8 +59,37 @@ const updateItem = async (_, { input }) => {
 
 // Add single function for updating completed state
 
-const allItems = async () => {
-  const result = await dynamoDb.scan({ TableName }).promise();
+const allItems = async (_, { completed, text }) => {
+  // dynamically construct params depending on filter values
+  let expressionAttributeValues = {};
+  let filterExpressions = [];
+  let expressionAttributeNames = {};
+
+  if (completed) {
+    expressionAttributeNames["#c"] = "completed";
+    filterExpressions.push("#c = :completed");
+    expressionAttributeValues[":completed"] = completed;
+  }
+
+  if (text) {
+    expressionAttributeNames["#t"] = "text";
+    filterExpressions.push("contains(#t, :text)");
+    expressionAttributeValues[":text"] = text;
+  }
+
+  const params =
+    completed || text
+      ? {
+          TableName,
+          ExpressionAttributeNames: expressionAttributeNames,
+          FilterExpression: filterExpressions.join(" OR "),
+          ExpressionAttributeValues: expressionAttributeValues
+        }
+      : {
+          TableName
+        };
+
+  const result = await dynamoDb.scan(params).promise();
 
   return result.Items;
 };
