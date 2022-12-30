@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "babel-loader": "^8.0.4",
-    "webpack": "^4.20.2",
+    "webpack": "^5.75.0",
     "webpack-node-externals": "^1.7.2"
   }
 }
